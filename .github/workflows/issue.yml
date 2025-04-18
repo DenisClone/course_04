@@ -2,42 +2,16 @@
 
 name: Deployment
 
-on: [push, workflow_dispatch]
+on:
+  issues:
+      types: opened
 jobs: 
-  test-job:
+  echo-issue-details:
     runs-on: ubuntu-22.04
 #    runs-on: windows-2022
     steps:
-      - name: Get code
-        uses: actions/checkout@v3
-        with:
-          ref: 'main'
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm test
-  deploy-job:
-    needs: test-job
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-        with:
-          ref: 'main'
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Deploy
-        run: echo "Deploying site....."
+      - name: Echo issue details
+        run: echo "${{ toJSON(github.event.issue) }}"
 
 
 

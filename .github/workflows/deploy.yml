@@ -13,7 +13,7 @@ jobs:
         with:
           ref: 'main'
       - name: Install NodeJS
-        uses: actions/setip-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: Install dependencies

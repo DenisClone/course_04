@@ -8,11 +8,16 @@ on:
 jobs: 
   echo-issue-details:
     runs-on: ubuntu-22.04
-#    runs-on: windows-2022
+#    if: contains(github.event.issue.labels.*.name, 'new-repo')
     steps:
       - name: Echo issue details
-        run: echo "${{ toJSON(github.event.issue) }}"
+        run: |
+          echo "Title: ${{ github.event.issue.title }}"
+          echo "Body: ${{ github.event.issue.body }}"
+          echo "Number: ${{ github.event.issue.number }}"
 
+#      - name: Full info
+#        run: echo "${{ toJSON(github.event.issue) }}"
 
 
         
